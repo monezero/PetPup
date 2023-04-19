@@ -47,7 +47,7 @@ const Home = () => {
         }}
         onPress={handleSubmit(onSubmit)}
       >
-        Butão
+        Botão
       </Button>
     </HomeContainer>
   );

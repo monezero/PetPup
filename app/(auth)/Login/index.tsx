@@ -1,10 +1,13 @@
 import { Button } from '@components/Button/Button';
 import Input from '@components/Input/Input';
 import React from 'react';
+import LogoSVG from '@assets/LogoSVG.svg';
 import { useForm } from 'react-hook-form';
 import { LoginForm } from '@validation/Login.validation';
 import { useRouter } from 'expo-router';
-import { LoginContainer, Logo } from './styles';
+import { Ionicons } from '@expo/vector-icons';
+
+import { LoginContainer, OrView, SmallText } from './styles';
 
 const Login = () => {
   const router = useRouter();
@@ -19,10 +22,23 @@ const Login = () => {
 
   return (
     <LoginContainer>
-      <Logo source="@assets/PetPup.png" />
-      <Input control={control} placeholder="Email" name="email" />
-      <Input control={control} placeholder="Senha" password name="password" />
+      <LogoSVG height={300} />
+      <Input
+        control={control}
+        placeholder="Email"
+        name="email"
+        iconLeft="email"
+      />
+      <Input
+        control={control}
+        placeholder="Senha"
+        password
+        name="password"
+        iconLeft="lock"
+      />
+      <SmallText>Esqueceu sua senha?</SmallText>
       <Button onPress={handleSubmit(onSubmit)}>Entrar</Button>
+      <OrView />
       <Button href="/Signup">Cadastre-se</Button>
     </LoginContainer>
   );

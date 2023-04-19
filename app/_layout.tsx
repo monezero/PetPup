@@ -58,7 +58,7 @@ const App = () => {
           <AuthProvider>
             <SafeAreaProvider>
               <SafeAreaView style={{ flex: 1 }}>
-                <StatusBar style="auto" />
+                <StatusBar style="dark" />
                 <Slot />
                 <Toast config={toastConfig} />
               </SafeAreaView>

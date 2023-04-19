@@ -70,7 +70,7 @@ const Input = <TFieldValues extends FieldValues>({
         style={{ ...containerStyle, marginTop, ...shadow.default }}
       >
         {!!iconLeft && (
-          <MaterialIcons name={iconLeft} size={24} color="#2c7d75" />
+          <MaterialIcons name={iconLeft} size={24} color="#0369a1" />
         )}
         {type ? (
           <TextInputMasked
@@ -94,6 +94,7 @@ const Input = <TFieldValues extends FieldValues>({
             name={passwordHidden ? 'eye-off' : 'eye'}
             size={20}
             color="black"
+            style={{ position: 'absolute', right: 10 }}
             onPress={() => setPasswordHidden(!passwordHidden)}
           />
         )}
