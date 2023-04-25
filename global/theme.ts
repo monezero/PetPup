@@ -13,6 +13,7 @@ export const theme = {
     primary: '#420863',
     search_bar: '#535353',
     input_background: '#1e1e1e',
+    success: '#4BB543',
     error: '#FF0000',
   },
   fonts: {

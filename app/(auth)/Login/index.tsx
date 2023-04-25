@@ -5,7 +5,7 @@ import LogoSVG from '@assets/LogoSVG.svg';
 import { useForm } from 'react-hook-form';
 import { LoginForm } from '@validation/Login.validation';
 import { useRouter } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
+import Toast from 'react-native-toast-message';
 
 import { LoginContainer, OrView, SmallText } from './styles';
 
@@ -15,9 +15,24 @@ const Login = () => {
     // resolver: yupResolver(LoginSchema),
   });
 
-  const onSubmit = (data: LoginForm) => {
-    console.log('🚀 ~ file: index.tsx:16 ~ data:', data);
-    router.replace('/Home');
+  const onSubmit = async (data: LoginForm) => {
+    try {
+      if (!data.email || !data.password) {
+        throw new Error('Por favor, preencha todos os campos');
+      }
+
+      console.log('🚀 ~ file: index.tsx:16 ~ data:', data);
+      router.replace('/Home');
+    } catch (error: Error) {
+      console.error('Erro ao fazer login:', error.message);
+      Toast.show({
+        type: 'error',
+        text1: 'Erro ao fazer login',
+        text2: error.message,
+        visibilityTime: 3000,
+        autoHide: true,
+      });
+    }
   };
 
   return (
@@ -40,6 +55,7 @@ const Login = () => {
       <Button onPress={handleSubmit(onSubmit)}>Entrar</Button>
       <OrView />
       <Button href="/Signup">Cadastre-se</Button>
+      <Toast ref={ref => Toast.setRef(ref)} />
     </LoginContainer>
   );
 };
