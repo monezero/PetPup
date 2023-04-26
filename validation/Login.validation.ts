@@ -2,6 +2,7 @@ import * as Yup from 'yup';
 
 export type LoginForm = Yup.InferType<typeof LoginSchema>;
 export type SignOnForm = Yup.InferType<typeof SignOnSchema>;
+export type ForgotPasswordForm = Yup.InferType<typeof ForgotPasswordSchema>;
 
 export const LoginSchema = Yup.object({
   email: Yup.string().email('Email Inválido').required('Email Obrigatório'),
@@ -15,4 +16,8 @@ export const SignOnSchema = Yup.object({
   confirmpassword: Yup.string()
     .required('Confirme a sua senha')
     .oneOf([Yup.ref('password'), null], 'As senhas devem ser iguais'),
+});
+
+export const ForgotPasswordSchema = Yup.object({
+  email: Yup.string().email('Email Inválido').required('Email obrigatório'),
 });

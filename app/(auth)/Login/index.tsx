@@ -11,6 +11,7 @@ import { LoginContainer, OrView, SmallText } from './styles';
 
 const Login = () => {
   const router = useRouter();
+  const forgotPassword = router.replace('/ForgotPassword');
   const { control, handleSubmit } = useForm<LoginForm>({
     // resolver: yupResolver(LoginSchema),
   });
