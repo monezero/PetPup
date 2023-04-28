@@ -3,17 +3,16 @@ import Input from '@components/Input/Input';
 import React from 'react';
 import LogoSVG from '@assets/LogoSVG.svg';
 import { useForm } from 'react-hook-form';
-import { LoginForm } from '@validation/Login.validation';
-import { useRouter } from 'expo-router';
+import { LoginForm, LoginSchema } from '@validation/Login.validation';
+import { useRouter, Link } from 'expo-router';
 import Toast from 'react-native-toast-message';
-
-import { LoginContainer, OrView, SmallText } from './styles';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { LoginContainer, OrView } from './styles';
 
 const Login = () => {
   const router = useRouter();
-  const forgotPassword = router.replace('/ForgotPassword');
   const { control, handleSubmit } = useForm<LoginForm>({
-    // resolver: yupResolver(LoginSchema),
+    resolver: yupResolver(LoginSchema),
   });
 
   const onSubmit = async (data: LoginForm) => {
@@ -52,7 +51,19 @@ const Login = () => {
         name="password"
         iconLeft="lock"
       />
-      <SmallText>Esqueceu sua senha?</SmallText>
+
+      <Link
+        href="/ForgotPassword"
+        style={{
+          alignSelf: 'flex-end',
+          marginBottom: 10,
+          fontFamily: 'Roboto_700Bold',
+          color: '#fff',
+          fontSize: 18,
+        }}
+      >
+        Esqueceu sua senha?
+      </Link>
       <Button onPress={handleSubmit(onSubmit)}>Entrar</Button>
       <OrView />
       <Button href="/Signup">Cadastre-se</Button>

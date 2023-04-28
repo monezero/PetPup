@@ -16,9 +16,10 @@ export const LoginContainer = styled.View`
 `;
 
 export const SmallText = styled.Text`
-  align-self: flex-end;
+  align-self: center;
   margin-left: 8px;
   margin-bottom: 10px;
+  font-size: 18px;
   font-family: 'Roboto_400Regular';
   text-shadow: -1px 1px 10px black;
   color: ${theme.colors.text_white};

@@ -1,27 +1,25 @@
-import React, { useState } from 'react';
-import { Button } from '@components/Button/Button';
-import { ModalContainer, ModalContent, TextModal } from './styles';
+import React from 'react';
+import { Text } from 'react-native';
+import { ModalButton, ModalContainer, ModalContent, TextModal } from './styles';
 
-export const Modal = ({ onClose }) => {
-  const [modalOpen, setModalOpen] = useState(false);
+interface ModalProps {
+  text: string;
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+export const Modal = ({ text, isOpen, onClose }: ModalProps) => {
   return (
-    <ModalContainer
-      animationType="slide"
-      visible={modalOpen}
-      transparent
-      onRequestClose={onClose}
-    >
-      <ModalContent>
-        <TextModal>Registrado com sucesso</TextModal>
-        <Button
-          style={{ backgroundColor: '#4BB543' }}
-          onPress={() => {
-            setModalOpen(false);
-          }}
-        >
-          Confirmar
-        </Button>
-      </ModalContent>
-    </ModalContainer>
+    isOpen && (
+      <ModalContainer transparent animationType="fade">
+        <ModalContent>
+          <TextModal>{text}</TextModal>
+
+          <ModalButton onPress={onClose}>
+            <Text>Fechar</Text>
+          </ModalButton>
+        </ModalContent>
+      </ModalContainer>
+    )
   );
 };

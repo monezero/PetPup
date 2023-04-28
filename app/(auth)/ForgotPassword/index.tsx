@@ -3,26 +3,29 @@ import Input from '@components/Input/Input';
 import React, { useState } from 'react';
 import LogoSVG from '@assets/LogoSVG.svg';
 import { useForm } from 'react-hook-form';
-import { ForgotPasswordForm } from '@validation/Login.validation';
+import {
+  ForgotPasswordForm,
+  ForgotPasswordSchema,
+} from '@validation/Login.validation';
 import { useRouter } from 'expo-router';
 import Toast from 'react-native-toast-message';
+import { yupResolver } from '@hookform/resolvers/yup';
 
-import styled from 'styled-components/native';
-import { theme } from '@global/theme';
-import { LoginContainer } from './styles';
+import { Modal } from '@components/Modal/Modal';
+import { LoginContainer, SmallText } from './styles';
 
 const ForgotPassword = () => {
   const router = useRouter();
-  const [modalOpen, setModalOpen] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
   const showModal = () => {
-    setModalOpen(true);
+    setOpenModal(true);
     setTimeout(() => {
-      setModalOpen(false);
-    }, 3000);
+      setOpenModal(false);
+    }, 10000);
   };
   const { control, handleSubmit } = useForm<ForgotPasswordForm>({
-    // resolver: yupResolver(LoginSchema),
+    resolver: yupResolver(ForgotPasswordSchema),
   });
 
   const onSubmit = async (data: ForgotPasswordForm) => {
@@ -34,7 +37,7 @@ const ForgotPassword = () => {
       console.log('🚀 ~ file: index.tsx:16 ~ data:', data);
       showModal();
       setTimeout(() => {
-        router.replace('/Signup');
+        router.replace('/Login');
       }, 3000);
     } catch (error: Error) {
       console.error('Erro ao enviar o email:', error.message);
@@ -51,6 +54,9 @@ const ForgotPassword = () => {
   return (
     <LoginContainer>
       <LogoSVG height={300} />
+      <SmallText>
+        Para redefinir sua senha, informe o e-mail cadastrado
+      </SmallText>
       <Input
         control={control}
         placeholder="Email"
@@ -60,46 +66,14 @@ const ForgotPassword = () => {
       <Button onPress={handleSubmit(onSubmit)}>Enviar</Button>
 
       <Toast ref={ref => Toast.setRef(ref)} />
-      <ModalContainer
-        visible={modalOpen}
-        transparent
-        onRequestClose={() => {
-          setModalOpen(false);
-        }}
-      >
-        <ModalContent>
-          <TextModal>Email enviado{'\n'}</TextModal>
-        </ModalContent>
-      </ModalContainer>
+
+      <Modal
+        isOpen={openModal}
+        onClose={() => setOpenModal(false)}
+        text="Email enviado com sucesso "
+      />
     </LoginContainer>
   );
 };
 
 export default ForgotPassword;
-
-export const ModalContainer = styled.Modal`
-  justify-content: center;
-  align-items: center;
-  margin: 0px;
-`;
-
-export const ModalContent = styled.View`
-  margin-top: 260px;
-  width: 60%;
-  align-self: center;
-  background-color: ${theme.colors.success};
-  padding: 2px;
-  border-radius: 20px;
-  border-width: 2px;
-  border-color: '#000';
-  justify-content: center;
-  align-items: center;
-`;
-
-export const TextModal = styled.Text`
-  margin-top: 18px;
-  align-self: center;
-  font-family: 'Roboto_700Bold';
-  font-size: 16px;
-  margin-bottom: 6px;
-`;

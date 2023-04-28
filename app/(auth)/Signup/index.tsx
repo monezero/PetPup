@@ -1,26 +1,29 @@
 import { Button } from '@components/Button/Button';
 import Input from '@components/Input/Input';
 import React, { useState } from 'react';
-import { Modal } from 'react-native';
+import { Modal } from '@components/Modal/Modal';
 import LogoSVG from '@assets/LogoSVG.svg';
 import { useForm } from 'react-hook-form';
-import { SignOnForm } from '@validation/Login.validation';
+import { SignOnForm, SignOnSchema } from '@validation/Login.validation';
 import { useRouter } from 'expo-router';
+import { yupResolver } from '@hookform/resolvers/yup';
+
 import Toast from 'react-native-toast-message';
-import styled from 'styled-components/native';
-import { theme } from '@global/theme';
+
 import { LoginContainer } from './styles';
 
-const SignUp = () => {
+const Signup = () => {
   const router = useRouter();
-  const { control, handleSubmit } = useForm<SignOnForm>({});
-  const [modalOpen, setModalOpen] = useState(false);
+  const { control, handleSubmit } = useForm<SignOnForm>({
+    resolver: yupResolver(SignOnSchema),
+  });
+  const [openModal, setOpenModal] = useState(false);
 
   const showModal = () => {
-    setModalOpen(true);
+    setOpenModal(true);
     setTimeout(() => {
-      setModalOpen(false);
-    }, 3000);
+      setOpenModal(false);
+    }, 10000);
   };
   const onSubmit = (data: SignOnForm) => {
     try {
@@ -48,7 +51,6 @@ const SignUp = () => {
       });
     }
   };
-
   return (
     <LoginContainer>
       <LogoSVG height={300} />
@@ -79,46 +81,12 @@ const SignUp = () => {
         iconLeft="lock"
       />
       <Button onPress={handleSubmit(onSubmit)}>Confirmar</Button>
-      <ModalContainer
-        visible={modalOpen}
-        transparent
-        onRequestClose={() => {
-          setModalOpen(false);
-        }}
-      >
-        <ModalContent>
-          <TextModal>Registrado com sucesso{'\n'}</TextModal>
-        </ModalContent>
-      </ModalContainer>
+      <Modal
+        isOpen={openModal}
+        onClose={() => setOpenModal(false)}
+        text="Sucesso"
+      />
     </LoginContainer>
   );
 };
-
-export default SignUp;
-
-export const ModalContainer = styled.Modal`
-  justify-content: center;
-  align-items: center;
-  margin: 0px;
-`;
-
-export const ModalContent = styled.View`
-  margin-top: 260px;
-  width: 60%;
-  align-self: center;
-  background-color: ${theme.colors.success};
-  padding: 2px;
-  border-radius: 20px;
-  border-width: 2px;
-  border-color: '#000';
-  justify-content: center;
-  align-items: center;
-`;
-
-export const TextModal = styled.Text`
-  margin-top: 18px;
-  align-self: center;
-  font-family: 'Roboto_700Bold';
-  font-size: 16px;
-  margin-bottom: 6px;
-`;
+export default Signup;
