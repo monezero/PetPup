@@ -32,6 +32,31 @@ const MainLayout = () => {
           },
         }}
       />
+      <Tabs.Screen
+        name="Settings/index"
+        options={{
+          tabBarLabel: 'Settings',
+          tabBarIcon: () => (
+            <Ionicons name="settings" size={24} color="black" />
+          ),
+          tabBarLabelStyle: {
+            fontFamily: 'Roboto_700Bold',
+            color: '#000',
+            marginBottom: 10,
+            letterSpacing: 0.5,
+          },
+          tabBarStyle: {
+            position: 'absolute',
+            backgroundColor: '#fa2',
+            borderTopWidth: 0,
+            bottom: 18,
+            borderRadius: 20,
+            height: 60,
+            right: 14,
+            left: 14,
+          },
+        }}
+      />
     </Tabs>
   );
 };

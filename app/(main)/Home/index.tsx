@@ -4,6 +4,11 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Text } from 'react-native';
 import Input from '@components/Input/Input';
+import Searchbar from '@components/Searchbar/Searchbar';
+import LogoSVG from '@assets/LogoSVG.svg';
+import { SvgXml } from 'react-native-svg';
+import styled from 'styled-components/native';
+import { height, width } from '@global/constants';
 import { HomeContainer } from './styles';
 
 type FormData = {
@@ -19,36 +24,17 @@ const Home = () => {
 
   return (
     <HomeContainer>
-      <Text
-        style={{
-          marginBottom: 20,
-        }}
-      >
-        Home
-      </Text>
-      <Dropdown
-        options={[
-          {
-            label: 'Teste',
-            value: 'teste',
-          },
-          {
-            label: 'Teste 2',
-            value: 'teste2',
-          },
-        ]}
-        control={control}
-        name="name"
+      <LogoSVG
+        height={100}
+        width={100}
+        style={{ justifyContent: 'flex-start', alignSelf: 'flex-start' }}
       />
-      <Button
-        style={{
-          marginTop: 20,
-          width: '90%',
-        }}
-        onPress={handleSubmit(onSubmit)}
-      >
-        Botão
-      </Button>
+      <Searchbar
+        placeholder="Pesquisar"
+        name="name"
+        iconLeft="search"
+        control={control}
+      />
     </HomeContainer>
   );
 };
