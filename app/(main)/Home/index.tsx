@@ -9,6 +9,8 @@ import LogoSVG from '@assets/LogoSVG.svg';
 import { SvgXml } from 'react-native-svg';
 import styled from 'styled-components/native';
 import { height, width } from '@global/constants';
+import SearchFilter from '@components/SearchFilter/SearchFilter';
+import { data } from 'data/data';
 import { HomeContainer } from './styles';
 
 type FormData = {
@@ -16,6 +18,7 @@ type FormData = {
 };
 
 const Home = () => {
+  const [input, setInput] = useState('');
   const { control, handleSubmit } = useForm<FormData>();
 
   const onSubmit = (data: FormData) => {
@@ -32,9 +35,12 @@ const Home = () => {
       <Searchbar
         placeholder="Pesquisar"
         name="name"
+        value={input}
+        onChangeText={text => setInput(text)}
         iconLeft="search"
         control={control}
       />
+      <SearchFilter data={data} input={input} setInput={setInput} />
     </HomeContainer>
   );
 };
