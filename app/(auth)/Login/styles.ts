@@ -7,6 +7,17 @@ export const Logo = styled(Image)`
   height: 100px;
 `;
 
+export const LoginBox = styled.KeyboardAvoidingView`
+  padding: 20%;
+  margin-top: 28%;
+  height: 60%;
+  width: 132%;
+  align-self: center;
+  justify-content: center;
+  border-radius: 32px;
+  background-color: ${theme.colors.blue_200};
+`;
+
 export const LoginContainer = styled.View`
   flex: 1;
   justify-content: center;

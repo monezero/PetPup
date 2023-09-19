@@ -8,8 +8,6 @@ export const InputContainer = styled.View`
   align-items: center;
   padding-left: 4%;
   width: 100%;
-  border-color: black;
-  border-width: 2px;
   border-radius: 10px;
   min-height: 50px;
 `;

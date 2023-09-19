@@ -1,13 +1,14 @@
 import { Button } from '@components/Button/Button';
 import Input from '@components/Input/Input';
 import React from 'react';
+import { KeyboardAvoidingView, Platform, StyleSheet } from 'react-native';
 import LogoSVG from '@assets/LogoSVG.svg';
 import { useForm } from 'react-hook-form';
 import { LoginForm, LoginSchema } from '@validation/Login.validation';
 import { useRouter, Link } from 'expo-router';
 import Toast from 'react-native-toast-message';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { LoginContainer, OrView } from './styles';
+import { LoginBox, LoginContainer, OrView } from './styles';
 
 const Login = () => {
   const router = useRouter();
@@ -38,38 +39,46 @@ const Login = () => {
   return (
     <LoginContainer>
       <LogoSVG height={300} />
-      <Input
-        control={control}
-        placeholder="Email"
-        name="email"
-        iconLeft="email"
-      />
-      <Input
-        control={control}
-        placeholder="Senha"
-        password
-        name="password"
-        iconLeft="lock"
-      />
 
-      <Link
-        href="/ForgotPassword"
-        style={{
-          alignSelf: 'flex-end',
-          marginBottom: 10,
-          fontFamily: 'Roboto_700Bold',
-          color: '#fff',
-          fontSize: 18,
-        }}
-      >
-        Esqueceu sua senha?
-      </Link>
-      <Button onPress={handleSubmit(onSubmit)}>Entrar</Button>
-      <OrView />
-      <Button href="/Signup">Cadastre-se</Button>
-      <Toast ref={ref => Toast.setRef(ref)} />
+      <LoginBox behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+        <Input
+          control={control}
+          placeholder="Email"
+          name="email"
+          iconLeft="email"
+        />
+        <Input
+          control={control}
+          placeholder="Senha"
+          password
+          name="password"
+          iconLeft="lock"
+        />
+
+        <Link
+          href="/ForgotPassword"
+          style={{
+            alignSelf: 'flex-end',
+            marginBottom: 10,
+            fontFamily: 'Roboto_700Bold',
+            color: '#fff',
+            fontSize: 18,
+          }}
+        >
+          Esqueceu sua senha?
+        </Link>
+        <Button onPress={handleSubmit(onSubmit)}>Entrar</Button>
+        <OrView />
+        <Button href="/Signup">Cadastre-se</Button>
+        <Toast ref={ref => Toast.setRef(ref)} />
+      </LoginBox>
     </LoginContainer>
   );
 };
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
 export default Login;

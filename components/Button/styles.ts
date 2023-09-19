@@ -9,10 +9,9 @@ export const Container = styled.TouchableOpacity`
   align-items: center;
   background-color: #fa2;
   border-radius: 10px;
-  border-width: 2px;
-  border-color: black;
+
   flex-direction: row;
-  border-radius: 18px;
+  border-radius: 9px;
   margin-bottom: 18px;
 `;
 
