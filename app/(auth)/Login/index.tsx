@@ -38,7 +38,7 @@ const Login = () => {
 
   return (
     <LoginContainer>
-      <LogoSVG height={300} />
+      <LogoSVG height={400} />
 
       <LoginBox behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
         <Input

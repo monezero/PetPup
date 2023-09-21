@@ -9,7 +9,6 @@ export const Logo = styled(Image)`
 
 export const LoginBox = styled.KeyboardAvoidingView`
   padding: 20%;
-  margin-top: 28%;
   height: 60%;
   width: 132%;
   align-self: center;

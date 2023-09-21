@@ -6,5 +6,5 @@ export const HomeContainer = styled.View`
   flex: 1;
   align-items: center;
   padding: 0px 10px;
-  background-color: ${theme.colors.blue_200};
+  background-color: ${theme.colors.blue_500};
 `;

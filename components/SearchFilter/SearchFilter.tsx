@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-filename-extension */
 import { View, Text, FlatList } from 'react-native';
-import { TextList, ViewList } from './style';
+import { ImageList, TextList, ViewList } from './style';
 
 const SearchFilter = ({ data, input, setInput }) => {
   return (
@@ -11,6 +11,7 @@ const SearchFilter = ({ data, input, setInput }) => {
           if (input === '') {
             return (
               <ViewList>
+                <ImageList source={item.image} />
                 <TextList>{item.name}</TextList>
               </ViewList>
             );
@@ -19,6 +20,7 @@ const SearchFilter = ({ data, input, setInput }) => {
           if (item.name.toLowerCase().includes(input.toLowerCase())) {
             return (
               <ViewList>
+                <ImageList source={item.image} />
                 <TextList>{item.name}</TextList>
               </ViewList>
             );

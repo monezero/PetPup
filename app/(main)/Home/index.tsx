@@ -11,6 +11,7 @@ import styled from 'styled-components/native';
 import { height, width } from '@global/constants';
 import SearchFilter from '@components/SearchFilter/SearchFilter';
 import { data } from 'data/data';
+import { Menu } from '@components/User/User';
 import { HomeContainer } from './styles';
 
 type FormData = {
@@ -32,6 +33,7 @@ const Home = () => {
         width={100}
         style={{ justifyContent: 'flex-start', alignSelf: 'flex-start' }}
       />
+      <Menu />
       <Searchbar
         placeholder="Pesquisar"
         name="name"

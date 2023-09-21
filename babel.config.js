@@ -20,7 +20,7 @@ module.exports = function(api) {
             '@global': './global',
             '@hooks' : './hooks',
             '@pages': './pages',
-            "@routes": "routes",
+            "@routes": "./routes",
             '@services': './services',
             '@utils': './utils',
             '@validation': './validation',
