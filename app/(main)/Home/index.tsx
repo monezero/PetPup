@@ -12,6 +12,7 @@ import { height, width } from '@global/constants';
 import SearchFilter from '@components/SearchFilter/SearchFilter';
 import { data } from 'data/data';
 import { Menu } from '@components/User/User';
+import { Redirect } from 'expo-router';
 import { HomeContainer } from './styles';
 
 type FormData = {
@@ -26,12 +27,21 @@ const Home = () => {
     console.log(data);
   };
 
+  const handleLogout = () => {
+    <Redirect href="/Login" />;
+  };
+
   return (
     <HomeContainer>
       <LogoSVG
         height={100}
         width={100}
-        style={{ justifyContent: 'flex-start', alignSelf: 'flex-start' }}
+        style={{
+          marginBottom: -10,
+
+          justifyContent: 'flex-start',
+          alignSelf: 'flex-start',
+        }}
       />
       <Menu />
       <Searchbar

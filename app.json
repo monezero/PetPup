@@ -29,7 +29,9 @@
     "web": {
       "favicon": "./assets/expo/favicon.png"
     },
+    "scheme": "myapp",
+    "plugins": [
 
-    "scheme": "myapp"
+    ]
   }
 }

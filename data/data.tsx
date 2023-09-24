@@ -5,12 +5,13 @@ export interface Data {
   name: string;
   image: any;
 }
-export const cachorro = require('@assets/cachorro.png');
+export const bento = require('@assets/bento.png');
 const gato = require('@assets/gato.png');
 const hamster = require('@assets/hamster.png');
 const peixe = require('@assets/peixe.png');
 const passaro = require('@assets/passaro.png');
 const coelho = require('@assets/coelho.png');
+export const cachorro = require('@assets/cachorro.png');
 
 export const data = [
   {
@@ -45,47 +46,47 @@ export const data = [
   },
   {
     name: 'Coelho',
-    id: '5',
+    id: '6',
     image: coelho,
   },
   {
     name: 'Coelho',
-    id: '5',
+    id: '7',
     image: coelho,
   },
   {
     name: 'Coelho',
-    id: '5',
+    id: '8',
     image: coelho,
   },
   {
     name: 'Coelho',
-    id: '5',
+    id: '9',
     image: coelho,
   },
   {
     name: 'Coelho',
-    id: '5',
+    id: '10',
     image: coelho,
   },
   {
     name: 'Coelho',
-    id: '5',
+    id: '11',
     image: coelho,
   },
   {
     name: 'Coelho',
-    id: '5',
+    id: '12',
     image: coelho,
   },
   {
     name: 'Coelho',
-    id: '5',
+    id: '13',
     image: coelho,
   },
   {
-    name: 'Coelho',
-    id: '5',
-    image: coelho,
+    name: 'Bento',
+    id: '14',
+    image: bento,
   },
 ];
