@@ -1,19 +1,12 @@
-import { Button } from '@components/Button/Button';
-import Dropdown from '@components/Dropdown/Dropdown';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Text } from 'react-native';
-import Input from '@components/Input/Input';
+import { TouchableWithoutFeedback, View } from 'react-native';
 import Searchbar from '@components/Searchbar/Searchbar';
 import LogoSVG from '@assets/LogoSVG.svg';
-import { SvgXml } from 'react-native-svg';
-import styled from 'styled-components/native';
-import { height, width } from '@global/constants';
 import SearchFilter from '@components/SearchFilter/SearchFilter';
 import { data } from 'data/data';
 import { Menu } from '@components/User/User';
-import { Redirect } from 'expo-router';
-import { HomeContainer } from './styles';
+import { HomeContainer, HomeText } from './styles';
 
 type FormData = {
   name: string;
@@ -21,38 +14,37 @@ type FormData = {
 
 const Home = () => {
   const [input, setInput] = useState('');
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { control, handleSubmit } = useForm<FormData>();
 
-  const onSubmit = (data: FormData) => {
-    console.log(data);
-  };
-
-  const handleLogout = () => {
-    <Redirect href="/Login" />;
+  const onSubmit = (_data: FormData) => {
+    console.log(_data);
   };
 
   return (
     <HomeContainer>
-      <LogoSVG
-        height={100}
-        width={100}
-        style={{
-          marginBottom: -10,
-
-          justifyContent: 'flex-start',
-          alignSelf: 'flex-start',
-        }}
-      />
-      <Menu />
-      <Searchbar
-        placeholder="Pesquisar"
-        name="name"
-        value={input}
-        onChangeText={text => setInput(text)}
-        iconLeft="search"
-        control={control}
-      />
-      <SearchFilter data={data} input={input} setInput={setInput} />
+      <TouchableWithoutFeedback
+        onPress={() => setIsMenuOpen(false)}
+        style={{ height: '100%', width: '100%' }}
+      >
+        <View style={{ height: '100%', width: '100%' }}>
+          <LogoSVG height={100} width={100} style={{}} />
+          <Menu
+            isOpen={isMenuOpen}
+            handleOpenMenu={() => setIsMenuOpen(true)}
+          />
+          <HomeText>Bem-vindo Bento</HomeText>
+          <Searchbar
+            placeholder="Pesquisar"
+            name="name"
+            value={input}
+            onChangeText={text => setInput(text)}
+            iconLeft="search"
+            control={control}
+          />
+          <SearchFilter data={data} input={input} setInput={setInput} />
+        </View>
+      </TouchableWithoutFeedback>
     </HomeContainer>
   );
 };

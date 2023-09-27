@@ -19,3 +19,24 @@ export const MenuImage = styled.Image`
   width: 100%;
   border-radius: 50px;
 `;
+
+export const MenuText = styled.Text`
+  padding-left: 10px;
+  justify-self: center;
+  font-family: ${theme.fonts.roboto_400};
+  font-size: 20px;
+  color: ${theme.colors.gray_500};
+`;
+
+export const MenuContainerVisible = styled.View`
+  justify-content: flex-end;
+  padding-left: 16px;
+  align-self: flex-end;
+  margin-top: -68px;
+  margin-left: 300px;
+  height: 70px;
+  width: 80px;
+  background-color: ${theme.colors.blue_200};
+  border-color: black;
+  border-width: 1px;
+`;

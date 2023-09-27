@@ -1,18 +1,44 @@
-import { cachorro } from 'data/data';
-import { bento } from 'data/data';
-import { useState } from 'react';
-import { Redirect, useNavigation } from 'expo-router';
-import { MenuContainer, MenuImage, MenuView } from './style';
+import React, { useState } from 'react';
+import { Link, Redirect, useNavigation } from 'expo-router';
+import { TouchableOpacity } from 'react-native';
+import {
+  MenuContainer,
+  MenuContainerVisible,
+  MenuImage,
+  MenuText,
+} from './style';
 
 interface MenuProps {
   onPress: () => void;
   onPressLogout: () => void;
+  isOpen: boolean;
+  handleClose: () => void;
 }
+export const Menu = ({
+  isOpen,
+  handleOpenMenu,
+  onPressLogout,
+  OnPress,
+}: MenuProps) => {
+  const handleMenuImagePress = () => {
+    setIsMenuVisible(!isMenuVisible);
+  };
 
-export const Menu = (props: MenuProps) => {
   return (
     <MenuContainer>
-      <MenuImage source={bento} />
+      <TouchableOpacity onPress={handleOpenMenu}>
+        <MenuImage source={require('@assets/bento.png')} />
+      </TouchableOpacity>
+
+      {isOpen && (
+        <TouchableOpacity>
+          <MenuContainerVisible>
+            <Link href="Login">
+              <MenuText>Sair</MenuText>
+            </Link>
+          </MenuContainerVisible>
+        </TouchableOpacity>
+      )}
     </MenuContainer>
   );
 };
