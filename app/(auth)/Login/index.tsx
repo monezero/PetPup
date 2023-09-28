@@ -1,6 +1,6 @@
 import { Button } from '@components/Button/Button';
 import Input from '@components/Input/Input';
-import React from 'react';
+import React, { useState } from 'react';
 import { KeyboardAvoidingView, Platform, StyleSheet } from 'react-native';
 import LogoSVG from '@assets/LogoSVG.svg';
 import { useForm } from 'react-hook-form';
@@ -8,31 +8,40 @@ import { LoginForm, LoginSchema } from '@validation/Login.validation';
 import { useRouter, Link } from 'expo-router';
 import Toast from 'react-native-toast-message';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { FIREBASE_AUTH } from '@services/firebase';
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from 'firebase/auth';
 import { LoginBox, LoginContainer, OrView } from './styles';
 
 const Login = () => {
   const router = useRouter();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const auth = FIREBASE_AUTH;
   const { control, handleSubmit } = useForm<LoginForm>({
     resolver: yupResolver(LoginSchema),
   });
 
-  const onSubmit = async (data: LoginForm) => {
+  const signIn = async () => {
+    setLoading(true);
     try {
-      if (!data.email || !data.password) {
-        throw new Error('Por favor, preencha todos os campos');
-      }
-
-      console.log('🚀 ~ file: index.tsx:16 ~ data:', data);
+      const response = await signInWithEmailAndPassword(auth, email, password);
+      console.log(response);
       router.replace('/Home');
     } catch (error: Error) {
-      console.error('Erro ao fazer login:', error.message);
+      console.log(error);
       Toast.show({
         type: 'error',
-        text1: 'Erro ao fazer login',
+        text1: 'Error ao fazer login',
         text2: error.message,
         visibilityTime: 3000,
         autoHide: true,
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -44,15 +53,21 @@ const Login = () => {
         <Input
           control={control}
           placeholder="Email"
+          value={email}
           name="email"
           iconLeft="email"
+          autoCapitalize="none"
+          onChangeText={text => setEmail(text)}
         />
         <Input
           control={control}
           placeholder="Senha"
+          value={password}
           password
           name="password"
           iconLeft="lock"
+          autoCapitalize="none"
+          onChangeText={text => setPassword(text)}
         />
 
         <Link
@@ -67,7 +82,7 @@ const Login = () => {
         >
           Esqueceu sua senha?
         </Link>
-        <Button onPress={handleSubmit(onSubmit)}>Entrar</Button>
+        <Button onPress={signIn}>Entrar</Button>
         <OrView />
         <Button href="/Signup">Cadastre-se</Button>
         <Toast ref={ref => Toast.setRef(ref)} />

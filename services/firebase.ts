@@ -6,18 +6,24 @@ import { initializeFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 
 const firebaseConfig = {
-  apiKey: '',
-  authDomain: '',
-  projectId: '',
-  storageBucket: '',
-  messagingSenderId: '',
-  appId: '',
+  apiKey: 'AIzaSyDmezaCo9DOFtbXS5FoYRS-XZxuII0Wfzs',
+
+  authDomain: 'petpup-4aeee.firebaseapp.com',
+
+  projectId: 'petpup-4aeee',
+
+  storageBucket: 'petpup-4aeee.appspot.com',
+
+  messagingSenderId: '91159465097',
+
+  appId: '1:91159465097:web:ba403524e3163340cb0a58',
 };
+
 // Initialize Firebase
-export const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
-export const db = getDatabase(app);
-export const storage = getStorage(app);
-export const firestore = initializeFirestore(app, {
+export const FIREBASE_APP = initializeApp(firebaseConfig);
+export const FIREBASE_AUTH = getAuth(FIREBASE_APP);
+export const FIREBASE_DATABASE = getDatabase(FIREBASE_APP);
+export const FIREBASE_STORAGE = getStorage(FIREBASE_APP);
+export const FIRESTORE_DB = initializeFirestore(FIREBASE_APP, {
   experimentalAutoDetectLongPolling: true,
 });

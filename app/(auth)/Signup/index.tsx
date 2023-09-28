@@ -10,6 +10,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import Toast from 'react-native-toast-message';
 
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { FIREBASE_AUTH } from '@services/firebase';
 import { LoginContainer } from './styles';
 
 const Signup = () => {
@@ -17,7 +19,11 @@ const Signup = () => {
   const { control, handleSubmit } = useForm<SignOnForm>({
     resolver: yupResolver(SignOnSchema),
   });
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [openModal, setOpenModal] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const auth = FIREBASE_AUTH;
 
   const showModal = () => {
     setOpenModal(true);
@@ -25,32 +31,34 @@ const Signup = () => {
       setOpenModal(false);
     }, 10000);
   };
-  const onSubmit = (data: SignOnForm) => {
+  const signUp = async () => {
+    setLoading(true);
     try {
-      if (
-        !data.name ||
-        !data.email ||
-        !data.password ||
-        !data.confirmpassword
-      ) {
-        throw new Error('Por favor preencha todos os campos');
-      }
-      console.log('🚀 ~ file: index.tsx:16 ~ data:', data);
+      const response = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      );
+      console.log(response);
+      alert('Verifique seu email');
       showModal();
       setTimeout(() => {
         router.replace('/Login');
       }, 3000);
     } catch (error: Error) {
-      console.error('Erro ao fazer cadastro:', error.message);
+      console.log(error);
       Toast.show({
         type: 'error',
-        text1: 'Erro ao cadastrar',
+        text1: 'Error ao registrar',
         text2: error.message,
         visibilityTime: 3000,
         autoHide: true,
       });
+    } finally {
+      setLoading(false);
     }
   };
+
   return (
     <LoginContainer>
       <LogoSVG height={300} />
@@ -80,7 +88,7 @@ const Signup = () => {
         name="confirmpassword"
         iconLeft="lock"
       />
-      <Button onPress={handleSubmit(onSubmit)}>Confirmar</Button>
+      <Button onPress={signUp}>Confirmar</Button>
       <Modal
         isOpen={openModal}
         onClose={() => setOpenModal(false)}
