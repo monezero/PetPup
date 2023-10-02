@@ -20,6 +20,8 @@ const Signup = () => {
     resolver: yupResolver(SignOnSchema),
   });
   const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [samepassword, setSamePassword] = useState('');
   const [password, setPassword] = useState('');
   const [openModal, setOpenModal] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -67,12 +69,16 @@ const Signup = () => {
         placeholder="Nome"
         name="name"
         iconLeft="person"
+        autoCapitalize="none"
+        onChangeText={text => setName(text)}
       />
       <Input
         control={control}
         placeholder="Email"
         name="email"
         iconLeft="email"
+        autoCapitalize="none"
+        onChangeText={text => setEmail(text)}
       />
       <Input
         control={control}
@@ -80,6 +86,8 @@ const Signup = () => {
         password
         name="password"
         iconLeft="lock"
+        autoCapitalize="none"
+        onChangeText={text => setPassword(text)}
       />
       <Input
         control={control}
@@ -87,6 +95,7 @@ const Signup = () => {
         password
         name="confirmpassword"
         iconLeft="lock"
+        onChangeText={text => setSamePassword(text)}
       />
       <Button onPress={signUp}>Confirmar</Button>
       <Modal
