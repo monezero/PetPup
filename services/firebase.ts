@@ -27,3 +27,6 @@ export const FIREBASE_STORAGE = getStorage(FIREBASE_APP);
 export const FIRESTORE_DB = initializeFirestore(FIREBASE_APP, {
   experimentalAutoDetectLongPolling: true,
 });
+
+// IOS 253656573885-gebbdagh8adjrk7veedgqap4968mt1tu.apps.googleusercontent.com
+// ANDROID 253656573885-emhgjtl5379qqa535gm9fkjc0uvjcskn.apps.googleusercontent.com

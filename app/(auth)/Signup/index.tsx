@@ -42,7 +42,7 @@ const Signup = () => {
         password,
       );
       console.log(response);
-      alert('Verifique seu email');
+
       showModal();
       setTimeout(() => {
         router.replace('/Login');
@@ -101,7 +101,7 @@ const Signup = () => {
       <Modal
         isOpen={openModal}
         onClose={() => setOpenModal(false)}
-        text="Sucesso"
+        text="Sucesso, verifique seu e-mail."
       />
     </LoginContainer>
   );

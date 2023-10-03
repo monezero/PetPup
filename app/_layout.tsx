@@ -1,5 +1,5 @@
 /* eslint-disable react/style-prop-object */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import {
   useFonts,
@@ -20,6 +20,8 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import useUpdate from '@hooks/useUpdate';
 
 import { Slot, SplashScreen } from 'expo-router';
+import { User, onAuthStateChanged } from 'firebase/auth';
+import { FIREBASE_AUTH } from '@services/firebase';
 
 export { ErrorBoundary } from '@components/ErrorBoundary/ErrorBoundary';
 
@@ -42,6 +44,13 @@ export const queryClient = new QueryClient({
 
 const App = () => {
   const isLoading = useUpdate();
+  const [user, setUser] = useState<User | null>(null);
+  useEffect(() => {
+    onAuthStateChanged(FIREBASE_AUTH, user => {
+      console.log('user', user);
+      setUser(user);
+    });
+  }, []);
   const [fontsLoaded] = useFonts({
     Roboto_400Regular,
     Roboto_700Bold,
