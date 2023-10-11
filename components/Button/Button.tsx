@@ -9,6 +9,7 @@ interface Props {
   onPress?: () => void;
   style?: ViewStyle;
   href?: Href;
+  type?: ButtonTypeStyleProps;
 }
 
 /**
@@ -22,6 +23,7 @@ export const Button = ({
   children,
   style,
   href,
+  type,
 }: PropsWithChildren<Props>) => {
   const router = useRouter();
   const handlePress = () => {

@@ -3,6 +3,7 @@ export const theme = {
     background: '#0c0c0c',
     blue_200: '#89cff0',
     blue_500: '#0ea5e9',
+    blue_600: '#2563eb',
     blue_700: '#0369a1',
     yellow_500: '#fa2',
     yellow_700: '#e5991e',

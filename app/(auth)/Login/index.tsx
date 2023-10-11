@@ -2,6 +2,7 @@ import { Button } from '@components/Button/Button';
 import Input from '@components/Input/Input';
 import React, { useState } from 'react';
 import { KeyboardAvoidingView, Platform, StyleSheet } from 'react-native';
+import * as Google from 'expo-auth-session/providers/google';
 import LogoSVG from '@assets/LogoSVG.svg';
 import { useForm } from 'react-hook-form';
 import { LoginForm, LoginSchema } from '@validation/Login.validation';
@@ -15,7 +16,7 @@ import {
 } from 'firebase/auth';
 import { LoginBox, LoginContainer, OrView } from './styles';
 
-const Login = () => {
+const Login = ({ promptAsync }) => {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -82,9 +83,14 @@ const Login = () => {
         >
           Esqueceu sua senha?
         </Link>
-        <Button onPress={signIn}>Entrar</Button>
+        <Button onPress={signIn} type="PRIMARY">
+          Entrar
+        </Button>
         <OrView />
-        <Button href="/Signup">Cadastre-se</Button>
+        <Button href="/Signup" type="GMAIL">
+          Cadastre-se
+        </Button>
+        <Button onPress={() => promptAsync()}>Entrar com Gmail</Button>
         <Toast ref={ref => Toast.setRef(ref)} />
       </LoginBox>
     </LoginContainer>

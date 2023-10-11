@@ -57,7 +57,7 @@ const App = () => {
   });
 
   if (!fontsLoaded || isLoading) {
-    return <SplashScreen />;
+    return SplashScreen.preventAutoHideAsync;
   }
 
   return (
