@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link, Redirect, useNavigation } from 'expo-router';
 import { TouchableOpacity } from 'react-native';
+import { signOut } from 'firebase/auth';
+import { FIREBASE_AUTH } from '@services/firebase';
 import {
   MenuContainer,
   MenuContainerVisible,
@@ -34,7 +36,9 @@ export const Menu = ({
         <TouchableOpacity>
           <MenuContainerVisible>
             <Link href="Login">
-              <MenuText>Sair</MenuText>
+              <MenuText onPress={async () => signOut(FIREBASE_AUTH)}>
+                Sair
+              </MenuText>
             </Link>
           </MenuContainerVisible>
         </TouchableOpacity>
