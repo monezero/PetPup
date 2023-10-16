@@ -15,7 +15,7 @@ import Login from './(auth)/Login';
 WebBrowser.maybeCompleteAuthSession();
 export default () => {
   const [userInfo, setUserInfo] = React.useState();
-  const [loading, setLoading] = react.useState(false);
+  const [loading, setLoading] = React.useState(false);
   const [request, response, promptAsync] = Google.useAuthRequest({
     iosClientId:
       '253656573885-gebbdagh8adjrk7veedgqap4968mt1tu.apps.googleusercontent.com',
@@ -33,8 +33,8 @@ export default () => {
       const userData = userJSON ? JSON.parse(userJSON) : null;
       console.log('local storage:', userData);
       setUserInfo(userData);
-    } catch (e) {
-      alert(e.message);
+    } catch (error) {
+      alert(error.message);
     } finally {
       setLoading(false);
     }
@@ -56,7 +56,7 @@ export default () => {
         setUserInfo(user);
         await AsyncStorage.setItem('@user', JSON.stringify(user));
       } else {
-        console.log('else');
+        console.log('no user');
       }
     });
 

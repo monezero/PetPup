@@ -32,7 +32,7 @@
     "web": {
       "favicon": "./assets/expo/favicon.png"
     },
-    "scheme": "PetPup",
+    "scheme": "petpup",
     "plugins": [],
     "extra": {
       "eas": {

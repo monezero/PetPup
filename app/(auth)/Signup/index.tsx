@@ -12,7 +12,8 @@ import Toast from 'react-native-toast-message';
 
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { FIREBASE_AUTH } from '@services/firebase';
-import { LoginContainer } from './styles';
+import { Platform } from 'react-native';
+import { LoginContainer, RegisterBox } from './styles';
 
 const Signup = () => {
   const router = useRouter();
@@ -63,41 +64,43 @@ const Signup = () => {
 
   return (
     <LoginContainer>
-      <LogoSVG height={300} />
-      <Input
-        control={control}
-        placeholder="Nome"
-        name="name"
-        iconLeft="person"
-        autoCapitalize="none"
-        onChangeText={text => setName(text)}
-      />
-      <Input
-        control={control}
-        placeholder="Email"
-        name="email"
-        iconLeft="email"
-        autoCapitalize="none"
-        onChangeText={text => setEmail(text)}
-      />
-      <Input
-        control={control}
-        placeholder="Senha"
-        password
-        name="password"
-        iconLeft="lock"
-        autoCapitalize="none"
-        onChangeText={text => setPassword(text)}
-      />
-      <Input
-        control={control}
-        placeholder="Confirme sua senha"
-        password
-        name="confirmpassword"
-        iconLeft="lock"
-        onChangeText={text => setSamePassword(text)}
-      />
-      <Button onPress={signUp}>Confirmar</Button>
+      <LogoSVG height={400} />
+      <RegisterBox behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+        <Input
+          control={control}
+          placeholder="Nome"
+          name="name"
+          iconLeft="person"
+          autoCapitalize="none"
+          onChangeText={text => setName(text)}
+        />
+        <Input
+          control={control}
+          placeholder="Email"
+          name="email"
+          iconLeft="email"
+          autoCapitalize="none"
+          onChangeText={text => setEmail(text)}
+        />
+        <Input
+          control={control}
+          placeholder="Senha"
+          password
+          name="password"
+          iconLeft="lock"
+          autoCapitalize="none"
+          onChangeText={text => setPassword(text)}
+        />
+        <Input
+          control={control}
+          placeholder="Confirme sua senha"
+          password
+          name="confirmpassword"
+          iconLeft="lock"
+          onChangeText={text => setSamePassword(text)}
+        />
+        <Button onPress={signUp}>Confirmar</Button>
+      </RegisterBox>
       <Modal
         isOpen={openModal}
         onClose={() => setOpenModal(false)}

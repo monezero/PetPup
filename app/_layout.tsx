@@ -46,9 +46,9 @@ const App = () => {
   const isLoading = useUpdate();
   const [user, setUser] = useState<User | null>(null);
   useEffect(() => {
-    onAuthStateChanged(FIREBASE_AUTH, user => {
-      console.log('user', user);
-      setUser(user);
+    onAuthStateChanged(FIREBASE_AUTH, userLogin => {
+      console.log('user', userLogin);
+      setUser(userLogin);
     });
   }, []);
   const [fontsLoaded] = useFonts({

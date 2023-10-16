@@ -22,14 +22,14 @@ export const MenuImage = styled.Image`
 
 export const MenuText = styled.Text`
   padding-left: 10px;
-  justify-self: center;
+  justify-content: center;
   font-family: ${theme.fonts.roboto_400};
-  font-size: 20px;
+  font-size: 22px;
   color: ${theme.colors.gray_500};
 `;
 
 export const MenuContainerVisible = styled.View`
-  justify-content: flex-end;
+  justify-content: center;
   padding-left: 16px;
   align-self: flex-end;
   margin-top: -68px;

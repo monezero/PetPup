@@ -32,3 +32,14 @@ export const OrView = styled.View`
   background-color: ${theme.colors.blue_700};
   width: 100%;
 `;
+
+export const RegisterBox = styled.KeyboardAvoidingView`
+  padding: 20%;
+
+  height: 60%;
+  width: 132%;
+  align-self: center;
+  justify-content: center;
+  border-radius: 32px;
+  background-color: ${theme.colors.blue_200};
+`;

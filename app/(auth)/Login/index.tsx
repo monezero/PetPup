@@ -1,8 +1,7 @@
 import { Button } from '@components/Button/Button';
 import Input from '@components/Input/Input';
 import React, { useState } from 'react';
-import { KeyboardAvoidingView, Platform, StyleSheet } from 'react-native';
-import * as Google from 'expo-auth-session/providers/google';
+import { Platform } from 'react-native';
 import LogoSVG from '@assets/LogoSVG.svg';
 import { useForm } from 'react-hook-form';
 import { LoginForm, LoginSchema } from '@validation/Login.validation';
@@ -10,10 +9,7 @@ import { useRouter, Link } from 'expo-router';
 import Toast from 'react-native-toast-message';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FIREBASE_AUTH } from '@services/firebase';
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from 'firebase/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { LoginBox, LoginContainer, OrView } from './styles';
 
 const Login = ({ promptAsync }) => {

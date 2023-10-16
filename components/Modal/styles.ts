@@ -9,13 +9,12 @@ export const ModalContainer = styled.Modal`
 
 export const ModalContent = styled.View`
   margin-top: 260px;
-  width: 60%;
+  height: 33%;
+  width: 70%;
   align-self: center;
-  background-color: ${theme.colors.blue_200};
+  background-color: ${theme.colors.gray_200};
   padding: 2px;
   border-radius: 20px;
-  border-width: 2px;
-  border-color: '#000';
   justify-content: center;
   align-items: center;
 `;
@@ -24,7 +23,7 @@ export const TextModal = styled.Text`
   margin-top: 18px;
   align-self: center;
   font-family: 'Roboto_700Bold';
-  font-size: 16px;
+  font-size: 32px;
   margin-bottom: 6px;
 `;
 
@@ -32,10 +31,11 @@ export const ModalButton = styled.TouchableOpacity`
   width: 100%;
   min-height: 45px;
   justify-content: center;
+  position: absolute;
+  bottom: 0;
   align-items: center;
   background-color: ${theme.colors.success};
-  border-radius: 10px;
-  border-width: 2px;
+  border-radius: 4px;
   border-color: black;
   font-size: 18px;
   font-family: 'Roboto_700Bold';

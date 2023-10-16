@@ -7,6 +7,7 @@ export const theme = {
     blue_700: '#0369a1',
     yellow_500: '#fa2',
     yellow_700: '#e5991e',
+    gray_200: '#e5e7eb',
     gray_500: '#64748b',
     gray_700: '#334155',
     text_white: '#FFFFFF',
