@@ -69,6 +69,7 @@ export default () => {
       </View>
     );
   }
+  console.log('promptAsync index alo', promptAsync);
   return userInfo ? (
     <Redirect href="/Home" />
   ) : (

@@ -3,7 +3,7 @@ import React, { PropsWithChildren } from 'react';
 import { ViewStyle } from 'react-native';
 import { Href } from 'expo-router/build/link/href';
 import { useRouter } from 'expo-router';
-import { ButtonText, Container } from './styles';
+import { ButtonText, ButtonTypeStyleProps, Container } from './styles';
 
 interface Props {
   onPress?: () => void;
@@ -36,7 +36,7 @@ export const Button = ({
   };
 
   return (
-    <Container onPress={handlePress} style={style}>
+    <Container onPress={handlePress} style={style} type={type ?? 'PRIMARY'}>
       <ButtonText>{children}</ButtonText>
     </Container>
   );

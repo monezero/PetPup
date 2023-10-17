@@ -12,7 +12,11 @@ import { FIREBASE_AUTH } from '@services/firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { LoginBox, LoginContainer, OrView } from './styles';
 
-const Login = ({ promptAsync }) => {
+interface ILogin {
+  promptAsync: () => void;
+}
+
+const Login = ({ promptAsync }: ILogin) => {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -41,7 +45,7 @@ const Login = ({ promptAsync }) => {
       setLoading(false);
     }
   };
-
+  console.log('promptAsync', promptAsync);
   return (
     <LoginContainer>
       <LogoSVG height={400} />
@@ -83,10 +87,12 @@ const Login = ({ promptAsync }) => {
           Entrar
         </Button>
         <OrView />
-        <Button href="/Signup" type="GMAIL">
+        <Button onPress={() => promptAsync()} type="GMAIL">
+          Entrar com Gmail
+        </Button>
+        <Button href="/Signup" type="PRIMARY">
           Cadastre-se
         </Button>
-        <Button onPress={() => promptAsync()}>Entrar com Gmail</Button>
         <Toast ref={ref => Toast.setRef(ref)} />
       </LoginBox>
     </LoginContainer>
