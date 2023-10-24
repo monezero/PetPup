@@ -9,7 +9,7 @@ import {
 import { theme } from '@global/theme';
 import Toast, { ErrorToast } from 'react-native-toast-message';
 import { ThemeProvider } from 'styled-components';
-import AuthProvider from '@hooks/useAuth';
+import { AuthProvider } from 'contexts/AuthContext';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { setDefaultOptions } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
