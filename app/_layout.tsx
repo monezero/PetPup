@@ -16,7 +16,7 @@ import { ptBR } from 'date-fns/locale';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { handleError } from '@utils/handleError';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-
+import { useAuth } from 'contexts/AuthContext';
 import useUpdate from '@hooks/useUpdate';
 
 import { Slot, SplashScreen } from 'expo-router';

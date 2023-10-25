@@ -17,7 +17,7 @@ const AuthContext = React.createContext();
 export const useAuth = () => useContext(AuthContext);
 
 WebBrowser.maybeCompleteAuthSession();
-export const AuthProvider = (props: { children }) => {
+export const AuthProvider = props => {
   const [userInfo, setUserInfo] = React.useState();
   const [loading, setLoading] = React.useState(false);
   const [request, response, promptAsync] = Google.useAuthRequest({
@@ -32,7 +32,13 @@ export const AuthProvider = (props: { children }) => {
   const value = {
     userInfo,
     setUserInfo,
+    loading,
+    setLoading,
+    request,
+    response,
+    promptAsync,
   };
+
   const checkLocalUser = async () => {
     try {
       setLoading(true);
@@ -70,7 +76,13 @@ export const AuthProvider = (props: { children }) => {
 
     return () => unsub;
   }, []);
-
+  if (loading) {
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <ActivityIndicator size="large" />
+      </View>
+    );
+  }
   return (
     <AuthContext.Provider value={value}>{props.children}</AuthContext.Provider>
   );
