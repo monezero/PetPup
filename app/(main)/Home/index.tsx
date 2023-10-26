@@ -6,6 +6,7 @@ import LogoSVG from '@assets/LogoSVG.svg';
 import SearchFilter from '@components/SearchFilter/SearchFilter';
 import { data } from 'data/data';
 import { Menu } from '@components/User/User';
+import { useAuth } from 'contexts/AuthContext';
 import { HomeContainer, HomeText } from './styles';
 
 type FormData = {
@@ -13,6 +14,7 @@ type FormData = {
 };
 
 const Home = () => {
+  const { userInfo } = useAuth();
   const [input, setInput] = useState('');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { control, handleSubmit } = useForm<FormData>();
@@ -33,7 +35,7 @@ const Home = () => {
             isOpen={isMenuOpen}
             handleOpenMenu={() => setIsMenuOpen(true)}
           />
-          <HomeText>Bem-vindo Bento</HomeText>
+          <HomeText>Bem-vindo {userInfo?.displayName}</HomeText>
           <Searchbar
             placeholder="Pesquisar"
             name="name"

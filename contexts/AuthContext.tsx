@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { Redirect } from 'expo-router';
+import React, { useContext } from 'react';
 import * as Google from 'expo-auth-session/providers/google';
 import * as WebBrowser from 'expo-web-browser';
 import {
@@ -10,7 +9,6 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FIREBASE_AUTH } from '@services/firebase';
 import { ActivityIndicator, View } from 'react-native';
-import Login from 'app/(auth)/Login';
 
 const AuthContext = React.createContext();
 

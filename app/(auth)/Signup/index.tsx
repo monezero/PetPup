@@ -10,7 +10,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import Toast from 'react-native-toast-message';
 
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { FIREBASE_AUTH } from '@services/firebase';
 import { Platform } from 'react-native';
 import { LoginContainer, RegisterBox } from './styles';
@@ -42,6 +42,8 @@ const Signup = () => {
         email,
         password,
       );
+
+      await updateProfile(response.user, { displayName: name });
       console.log(response);
 
       showModal();
@@ -105,6 +107,7 @@ const Signup = () => {
         isOpen={openModal}
         onClose={() => setOpenModal(false)}
         text="Sucesso, verifique seu e-mail."
+        type="REGISTER"
       />
     </LoginContainer>
   );

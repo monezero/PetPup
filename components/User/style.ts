@@ -27,6 +27,12 @@ export const MenuText = styled.Text`
   font-size: 22px;
   color: ${theme.colors.gray_500};
 `;
+export const MenuLine = styled.View`
+  height: 1px;
+  justify-content: center;
+  align-items: center;
+  color: ${theme.colors.gray_700};
+`;
 
 export const MenuContainerVisible = styled.View`
   justify-content: center;

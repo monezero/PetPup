@@ -1,5 +1,12 @@
 import { theme } from '@global/theme';
+import { Modal } from 'react-native';
 import styled from 'styled-components/native';
+
+export type ModalTypeStyleProps = 'REGISTER' | 'USER';
+
+type Props = {
+  type: ModalTypeStyleProps;
+};
 
 export const ModalContainer = styled.Modal`
   justify-content: center;
@@ -7,12 +14,13 @@ export const ModalContainer = styled.Modal`
   margin: 0px;
 `;
 
-export const ModalContent = styled.View`
+export const ModalContent = styled(Modal)<Props>`
   margin-top: 260px;
   height: 33%;
   width: 70%;
-  align-self: center;
-  background-color: ${theme.colors.gray_200};
+  align-self: flex-end;
+  background-color: ${({ type }) =>
+    type === 'REGISTER' ? theme.colors.gray_200 : theme.colors.blue_200};
   padding: 2px;
   border-radius: 20px;
   justify-content: center;

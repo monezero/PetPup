@@ -3,6 +3,7 @@ import { Link, Redirect, useNavigation } from 'expo-router';
 import { TouchableOpacity } from 'react-native';
 import { signOut } from 'firebase/auth';
 import { FIREBASE_AUTH } from '@services/firebase';
+import { Modal } from '@components/Modal/Modal';
 import {
   MenuContainer,
   MenuContainerVisible,
@@ -22,6 +23,7 @@ export const Menu = ({
   onPressLogout,
   OnPress,
 }: MenuProps) => {
+  const [openModal, setOpenModal] = useState(false);
   const handleMenuImagePress = () => {
     setIsMenuVisible(!isMenuVisible);
   };
@@ -33,15 +35,12 @@ export const Menu = ({
       </TouchableOpacity>
 
       {isOpen && (
-        <TouchableOpacity>
-          <MenuContainerVisible>
-            <Link href="Login">
-              <MenuText onPress={async () => signOut(FIREBASE_AUTH)}>
-                Sair
-              </MenuText>
-            </Link>
-          </MenuContainerVisible>
-        </TouchableOpacity>
+        <Modal
+          isOpen={openModal}
+          onClose={() => setOpenModal(false)}
+          text="Sucesso, verifique seu e-mail."
+          type="REGISTER"
+        />
       )}
     </MenuContainer>
   );
