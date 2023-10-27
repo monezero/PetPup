@@ -1,45 +1,42 @@
 import React, { useState } from 'react';
-import { Link, Redirect, useNavigation } from 'expo-router';
 import { TouchableOpacity } from 'react-native';
-import { signOut } from 'firebase/auth';
-import { FIREBASE_AUTH } from '@services/firebase';
 import { Modal } from '@components/Modal/Modal';
-import {
-  MenuContainer,
-  MenuContainerVisible,
-  MenuImage,
-  MenuText,
-} from './style';
+import { MenuContainer, MenuImage } from './style';
 
 interface MenuProps {
-  onPress: () => void;
-  onPressLogout: () => void;
   isOpen: boolean;
-  handleClose: () => void;
+  handleOpenMenu: () => void;
+  type: 'USER' | 'REGISTER';
 }
-export const Menu = ({
-  isOpen,
-  handleOpenMenu,
-  onPressLogout,
-  OnPress,
-}: MenuProps) => {
+
+export const Menu = ({ isOpen, handleOpenMenu, type }: MenuProps) => {
   const [openModal, setOpenModal] = useState(false);
-  const handleMenuImagePress = () => {
-    setIsMenuVisible(!isMenuVisible);
+
+  const showModal = () => {
+    setOpenModal(true);
+  };
+
+  const closeModal = () => {
+    setOpenModal(false);
   };
 
   return (
     <MenuContainer>
-      <TouchableOpacity onPress={handleOpenMenu}>
+      <TouchableOpacity
+        onPress={() => {
+          handleOpenMenu(); // Abrir o menu
+          showModal(); // Abrir o modal
+        }}
+      >
         <MenuImage source={require('@assets/bento.png')} />
       </TouchableOpacity>
 
       {isOpen && (
         <Modal
           isOpen={openModal}
-          onClose={() => setOpenModal(false)}
+          onClose={closeModal}
           text="Sucesso, verifique seu e-mail."
-          type="REGISTER"
+          type={type ?? 'REGISTER'}
         />
       )}
     </MenuContainer>

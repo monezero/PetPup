@@ -6,6 +6,7 @@ import {
   ModalContent,
   ModalTypeStyleProps,
   TextModal,
+  ViewTypeStyleProps,
 } from './styles';
 
 interface ModalProps {
@@ -15,16 +16,23 @@ interface ModalProps {
   type: ModalTypeStyleProps;
 }
 
+interface ViewProps {
+  type: ViewTypeStyleProps;
+}
+
 export const Modal = ({ text, isOpen, onClose, type }: ModalProps) => {
+  console.log(type);
   return (
     isOpen && (
-      <ModalContainer transparent animationType="fade">
-        <ModalContent type={type ?? 'PRIMARY'}>
+      <ModalContainer transparent animationType="fade" type="USER">
+        <ModalContent type={type}>
           <TextModal>{text}</TextModal>
 
-          <ModalButton onPress={onClose}>
-            <Text>Fechar</Text>
-          </ModalButton>
+          {type === 'REGISTER' && (
+            <ModalButton onPress={onClose}>
+              <Text>Fechar</Text>
+            </ModalButton>
+          )}
         </ModalContent>
       </ModalContainer>
     )

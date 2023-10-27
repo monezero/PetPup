@@ -34,6 +34,7 @@ const Home = () => {
           <Menu
             isOpen={isMenuOpen}
             handleOpenMenu={() => setIsMenuOpen(true)}
+            type="USER"
           />
           <HomeText>Bem-vindo {userInfo?.displayName}</HomeText>
           <Searchbar

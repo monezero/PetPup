@@ -1,24 +1,24 @@
 import { theme } from '@global/theme';
-import { Modal } from 'react-native';
+import { Modal, View } from 'react-native';
 import styled from 'styled-components/native';
 
 export type ModalTypeStyleProps = 'REGISTER' | 'USER';
 
-type Props = {
+type ModalProps = {
   type: ModalTypeStyleProps;
 };
 
-export const ModalContainer = styled.Modal`
+export const ModalContainer = styled(Modal)<ModalProps>`
   justify-content: center;
-  align-items: center;
+  align-items: ${({ type }) => (type === 'USER' ? 'flex-end' : 'center')};
   margin: 0px;
 `;
 
-export const ModalContent = styled(Modal)<Props>`
+export const ModalContent = styled(View)<ModalProps>`
   margin-top: 260px;
   height: 33%;
   width: 70%;
-  align-self: flex-end;
+  align-self: ${({ type }) => (type === 'REGISTER' ? 'center' : 'flex-end')};
   background-color: ${({ type }) =>
     type === 'REGISTER' ? theme.colors.gray_200 : theme.colors.blue_200};
   padding: 2px;
