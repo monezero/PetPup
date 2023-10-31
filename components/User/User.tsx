@@ -35,7 +35,8 @@ export const Menu = ({ isOpen, handleOpenMenu, type }: MenuProps) => {
         <Modal
           isOpen={openModal}
           onClose={closeModal}
-          text="Sucesso, verifique seu e-mail."
+          text="Sair da conta"
+          text2="Ir para Perfil"
           type={type ?? 'REGISTER'}
         />
       )}

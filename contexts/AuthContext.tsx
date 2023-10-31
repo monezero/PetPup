@@ -64,7 +64,7 @@ export const AuthProvider = props => {
     checkLocalUser();
     const unsub = onAuthStateChanged(FIREBASE_AUTH, async user => {
       if (user) {
-        console.log(JSON.stringify(user, null));
+        console.log(JSON.stringify(user, null, 2));
         setUserInfo(user);
         await AsyncStorage.setItem('@user', JSON.stringify(user));
       } else {

@@ -1,5 +1,5 @@
 import { theme } from '@global/theme';
-import { Modal, View } from 'react-native';
+import { Modal, View, Text } from 'react-native';
 import styled from 'styled-components/native';
 
 export type ModalTypeStyleProps = 'REGISTER' | 'USER';
@@ -15,24 +15,34 @@ export const ModalContainer = styled(Modal)<ModalProps>`
 `;
 
 export const ModalContent = styled(View)<ModalProps>`
-  margin-top: 260px;
-  height: 33%;
+  flex-direction: column;
+  margin-top: ${({ type }) => (type === 'REGISTER' ? '260px' : '8px')};
+  margin-right: ${({ type }) => (type === 'REGISTER' ? '0px' : '4px')};
+  min-height: 10%;
   width: 70%;
   align-self: ${({ type }) => (type === 'REGISTER' ? 'center' : 'flex-end')};
   background-color: ${({ type }) =>
     type === 'REGISTER' ? theme.colors.gray_200 : theme.colors.blue_200};
   padding: 2px;
-  border-radius: 20px;
+  border-radius: 8px;
   justify-content: center;
   align-items: center;
+  border-color: ${theme.colors.blue_700};
+  border-width: 0.5px;
 `;
 
-export const TextModal = styled.Text`
-  margin-top: 18px;
+export const TextModal = styled(Text)<ModalProps>`
   align-self: center;
   font-family: 'Roboto_700Bold';
-  font-size: 32px;
+  font-size: ${({ type }) => (type === 'REGISTER' ? '32px' : '18px')};
   margin-bottom: 6px;
+`;
+
+export const ModalSegment = styled.TouchableOpacity`
+  margin-top: 10px;
+  border-radius: 8px;
+  justify-content: center;
+  width: 100%;
 `;
 
 export const ModalButton = styled.TouchableOpacity`

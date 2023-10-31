@@ -7,6 +7,8 @@ import SearchFilter from '@components/SearchFilter/SearchFilter';
 import { data } from 'data/data';
 import { Menu } from '@components/User/User';
 import { useAuth } from 'contexts/AuthContext';
+import { signOut } from 'firebase/auth';
+import { FIREBASE_AUTH } from '@services/firebase';
 import { HomeContainer, HomeText } from './styles';
 
 type FormData = {
@@ -36,7 +38,9 @@ const Home = () => {
             handleOpenMenu={() => setIsMenuOpen(true)}
             type="USER"
           />
-          <HomeText>Bem-vindo {userInfo?.displayName}</HomeText>
+          <HomeText onPress={async () => signOut(FIREBASE_AUTH)}>
+            Bem-vindo {userInfo?.displayName}
+          </HomeText>
           <Searchbar
             placeholder="Pesquisar"
             name="name"
