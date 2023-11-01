@@ -5,10 +5,12 @@ import {
   GoogleAuthProvider,
   onAuthStateChanged,
   signInWithCredential,
+  signOut,
 } from 'firebase/auth'; // Modified import
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FIREBASE_AUTH } from '@services/firebase';
 import { ActivityIndicator, View } from 'react-native';
+import { useRouter } from 'expo-router';
 
 const AuthContext = React.createContext();
 
@@ -18,6 +20,7 @@ WebBrowser.maybeCompleteAuthSession();
 export const AuthProvider = props => {
   const [userInfo, setUserInfo] = React.useState();
   const [loading, setLoading] = React.useState(false);
+  const router = useRouter();
   const [request, response, promptAsync] = Google.useAuthRequest({
     iosClientId:
       '253656573885-gebbdagh8adjrk7veedgqap4968mt1tu.apps.googleusercontent.com',
@@ -63,17 +66,19 @@ export const AuthProvider = props => {
   React.useEffect(() => {
     checkLocalUser();
     const unsub = onAuthStateChanged(FIREBASE_AUTH, async user => {
+      console.log('🚀 ~ file: AuthContext.tsx:69 ~ user:', user);
       if (user) {
         console.log(JSON.stringify(user, null, 2));
         setUserInfo(user);
         await AsyncStorage.setItem('@user', JSON.stringify(user));
       } else {
-        console.log('no user');
+        router.replace('Login');
       }
     });
 
-    return () => unsub;
+    return () => unsub();
   }, []);
+
   if (loading) {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>

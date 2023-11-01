@@ -21,6 +21,11 @@ const Home = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { control, handleSubmit } = useForm<FormData>();
 
+  const logout = async () => {
+    await signOut(FIREBASE_AUTH);
+    console.log('Logout?');
+  };
+
   const onSubmit = (_data: FormData) => {
     console.log(_data);
   };
@@ -38,7 +43,7 @@ const Home = () => {
             handleOpenMenu={() => setIsMenuOpen(true)}
             type="USER"
           />
-          <HomeText onPress={async () => signOut(FIREBASE_AUTH)}>
+          <HomeText onPress={logout}>
             Bem-vindo {userInfo?.displayName}
           </HomeText>
           <Searchbar

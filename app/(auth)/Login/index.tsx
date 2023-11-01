@@ -21,7 +21,6 @@ const Login = ({ promptAsync }: ILogin) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const auth = FIREBASE_AUTH;
   const { control, handleSubmit } = useForm<LoginForm>({
     resolver: yupResolver(LoginSchema),
   });
@@ -29,7 +28,11 @@ const Login = ({ promptAsync }: ILogin) => {
   const signIn = async () => {
     setLoading(true);
     try {
-      const response = await signInWithEmailAndPassword(auth, email, password);
+      const response = await signInWithEmailAndPassword(
+        FIREBASE_AUTH,
+        email,
+        password,
+      );
       console.log(response);
       router.replace('/Home');
     } catch (error: Error) {
