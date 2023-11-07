@@ -7,16 +7,23 @@ interface MenuProps {
   isOpen: boolean;
   handleOpenMenu: () => void;
   type: 'USER' | 'REGISTER';
+  closeModal: () => void;
 }
 
-export const Menu = ({ isOpen, handleOpenMenu, type }: MenuProps) => {
+export const Menu = ({
+  isOpen,
+  handleOpenMenu,
+  type,
+  closeModal,
+}: MenuProps) => {
   const [openModal, setOpenModal] = useState(false);
 
   const showModal = () => {
     setOpenModal(true);
   };
 
-  const closeModal = () => {
+  const onCloseModal = () => {
+    closeModal(); // Close the modal
     setOpenModal(false);
   };
 
@@ -34,7 +41,7 @@ export const Menu = ({ isOpen, handleOpenMenu, type }: MenuProps) => {
       {isOpen && (
         <Modal
           isOpen={openModal}
-          onClose={closeModal}
+          onClose={onCloseModal}
           text="Sair da conta"
           text2="Ir para Perfil"
           type={type ?? 'REGISTER'}

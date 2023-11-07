@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { TouchableWithoutFeedback, View } from 'react-native';
+import {
+  TouchableHighlight,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 import Searchbar from '@components/Searchbar/Searchbar';
 import LogoSVG from '@assets/LogoSVG.svg';
 import SearchFilter from '@components/SearchFilter/SearchFilter';
@@ -9,6 +13,8 @@ import { Menu } from '@components/User/User';
 import { useAuth } from 'contexts/AuthContext';
 import { signOut } from 'firebase/auth';
 import { FIREBASE_AUTH } from '@services/firebase';
+import { router } from 'expo-router';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import { HomeContainer, HomeText } from './styles';
 
 type FormData = {
@@ -21,18 +27,13 @@ const Home = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { control, handleSubmit } = useForm<FormData>();
 
-  const logout = async () => {
-    await signOut(FIREBASE_AUTH);
-    console.log('Logout?');
-  };
-
   const onSubmit = (_data: FormData) => {
     console.log(_data);
   };
 
   return (
     <HomeContainer>
-      <TouchableWithoutFeedback
+      <TouchableHighlight
         onPress={() => setIsMenuOpen(false)}
         style={{ height: '100%', width: '100%' }}
       >
@@ -43,9 +44,7 @@ const Home = () => {
             handleOpenMenu={() => setIsMenuOpen(true)}
             type="USER"
           />
-          <HomeText onPress={logout}>
-            Bem-vindo {userInfo?.displayName}
-          </HomeText>
+          <HomeText>Bem-vindo {userInfo?.displayName}</HomeText>
           <Searchbar
             placeholder="Pesquisar"
             name="name"
@@ -56,7 +55,7 @@ const Home = () => {
           />
           <SearchFilter data={data} input={input} setInput={setInput} />
         </View>
-      </TouchableWithoutFeedback>
+      </TouchableHighlight>
     </HomeContainer>
   );
 };

@@ -1,15 +1,10 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { TouchableWithoutFeedback, View } from 'react-native';
-import Searchbar from '@components/Searchbar/Searchbar';
-import LogoSVG from '@assets/LogoSVG.svg';
-import SearchFilter from '@components/SearchFilter/SearchFilter';
-import { data } from 'data/data';
-import { Menu } from '@components/User/User';
+import { View, Text } from 'react-native';
 import { useAuth } from 'contexts/AuthContext';
 import { signOut } from 'firebase/auth';
 import { FIREBASE_AUTH } from '@services/firebase';
-import { HomeContainer, HomeText } from './styles';
+import { ProfileContainer, UserContainer, UserImage, UserText } from './styles';
 
 type FormData = {
   name: string;
@@ -17,6 +12,7 @@ type FormData = {
 
 const Profile = () => {
   const { userInfo } = useAuth();
+
   const [input, setInput] = useState('');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { control, handleSubmit } = useForm<FormData>();
@@ -26,9 +22,12 @@ const Profile = () => {
   };
 
   return (
-    <View>
-      <Text>Teste</Text>
-    </View>
+    <ProfileContainer>
+      <UserContainer>
+        <UserImage source={require('@assets/bento.png')} />
+        <UserText>{userInfo?.displayName}</UserText>
+      </UserContainer>
+    </ProfileContainer>
   );
 };
 

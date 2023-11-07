@@ -19,7 +19,9 @@ export const ModalContent = styled(View)<ModalProps>`
   margin-top: ${({ type }) => (type === 'REGISTER' ? '260px' : '8px')};
   margin-right: ${({ type }) => (type === 'REGISTER' ? '0px' : '4px')};
   min-height: 10%;
-  width: 70%;
+  max-width: ${({ type }) => (type === 'REGISTER' ? '70%' : '100%')};
+  min-width: 70%;
+  max-height: ${({ type }) => (type === 'REGISTER' ? '200px' : '80px')};
   align-self: ${({ type }) => (type === 'REGISTER' ? 'center' : 'flex-end')};
   background-color: ${({ type }) =>
     type === 'REGISTER' ? theme.colors.gray_200 : theme.colors.blue_200};
