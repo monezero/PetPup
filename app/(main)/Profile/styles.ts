@@ -21,6 +21,12 @@ export const UserContainer = styled.View`
 `;
 
 export const UserImage = styled.Image`
+  height: 100%;
+  width: 100%;
+  border-radius: 50px;
+`;
+
+export const UserImageWrapper = styled.TouchableOpacity`
   position: absolute;
   top: -30px;
   border: 4px;
@@ -31,7 +37,6 @@ export const UserImage = styled.Image`
 `;
 
 export const UserText = styled.Text`
-  justify-self: center;
   font-family: ${theme.fonts.roboto_700};
   font-size: 24px;
   color: ${theme.colors.text_black};
