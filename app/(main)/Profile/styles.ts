@@ -1,6 +1,10 @@
 import { theme } from '@global/theme';
+import { Image } from 'expo-image';
 import styled from 'styled-components/native';
 
+type AvatarProps = {
+  uri: string;
+};
 export const ProfileContainer = styled.View`
   flex: 1;
   align-items: center;
@@ -20,7 +24,7 @@ export const UserContainer = styled.View`
   border-radius: 16px;
 `;
 
-export const UserImage = styled.Image`
+export const UserImage = styled(Image)<AvatarProps>`
   height: 100%;
   width: 100%;
   border-radius: 50px;

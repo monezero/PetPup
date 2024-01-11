@@ -52,18 +52,43 @@ const Profile = () => {
       },
     );
   };
+
+  const saveImage = async image => {
+    try {
+      setImageUser(image);
+    } catch (error) {
+      throw error;
+    }
+  };
   const pickImageFromGallery = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       aspect: [4, 3],
       quality: 1,
     });
 
     console.log(result);
-
+    // Salvar imagem
     if (!result.canceled) {
-      setImageUser(result.assets[0].uri);
+      await saveImage(result.assets[0].uri);
+    }
+  };
+
+  const pickImageFromCamera = async () => {
+    try {
+      await ImagePicker.requestCameraPermissionsAsync();
+      const result = await ImagePicker.launchCameraAsync({
+        allowsEditing: true,
+        aspect: [1, 1],
+        quality: 1,
+      });
+
+      if (!result.canceled) {
+        await saveImage(result.assets[0].uri);
+      }
+    } catch (error) {
+      alert(`Erro com o upload da imagem:${error.message}`);
     }
   };
 
@@ -71,7 +96,12 @@ const Profile = () => {
     <ProfileContainer>
       <UserContainer>
         <UserImageWrapper onPress={() => handleImageUser()}>
-          <UserImage source={require('@assets/bento.png')} />
+          <UserImage
+            uri={imageUser}
+            source={
+              imageUser ? { uri: imageUser } : require('@assets/bento.png')
+            }
+          />
         </UserImageWrapper>
         <UserText>{userInfo?.displayName}</UserText>
         <UserText>{userInfo?.email}</UserText>
