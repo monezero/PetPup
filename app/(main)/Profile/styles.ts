@@ -46,3 +46,11 @@ export const UserText = styled.Text`
   color: ${theme.colors.text_black};
   margin-top: 70px;
 `;
+
+export const LoadingProfile = styled.ActivityIndicator`
+  height: 100px;
+  width: 100px;
+  border-radius: 50px;
+  overflow: hidden;
+  color: black;
+`;

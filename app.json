@@ -33,7 +33,9 @@
       "favicon": "./assets/expo/favicon.png"
     },
     "scheme": "petpup",
-    "plugins": [],
+    "plugins": [
+      "expo-router"
+    ],
     "extra": {
       "eas": {
         "projectId": "12f31727-9d4b-4be7-86e5-affbf5bc9830"
