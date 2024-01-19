@@ -10,12 +10,16 @@ import {
 } from 'firebase/storage';
 import * as ImagePicker from 'expo-image-picker';
 import { Alert, ActivityIndicator } from 'react-native'; // Importando ActivityIndicator
+import Input from '@components/Input/Input';
+import { ProfileSchema } from '@validation/Login.validation';
+import { yupResolver } from '@hookform/resolvers/yup';
 import {
   LoadingProfile,
   ProfileContainer,
   UserContainer,
   UserImage,
   UserImageWrapper,
+  UserInputContainer,
   UserText,
 } from './styles';
 
@@ -25,12 +29,16 @@ type FormData = {
 
 const Profile = () => {
   const { userInfo } = useAuth();
+  const { control, handleSubmit } = useForm<ProfileSchema>({
+    resolver: yupResolver(ProfileSchema),
+  });
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+
   const [imageUser, setImageUser] = useState<string | null>(
     userInfo?.photoURL || null,
   );
-  const [loading, setLoading] = useState<boolean>(false); // Estado para controlar o carregamento da imagem
-
-  const { control, handleSubmit } = useForm<FormData>();
+  const [loading, setLoading] = useState<boolean>(false);
 
   const storage = getStorage();
   const storageRef = ref(storage);
@@ -209,8 +217,27 @@ const Profile = () => {
             />
           )}
         </UserImageWrapper>
-        <UserText>{userInfo?.displayName}</UserText>
-        <UserText>{userInfo?.email}</UserText>
+        <UserInputContainer>
+          <UserText>Nome</UserText>
+          <Input
+            control={control}
+            placeholder={userInfo?.displayName}
+            name="name"
+            iconLeft="person"
+            autoCapitalize="none"
+            onChangeText={text => setName(text)}
+          />
+          <UserText>Email</UserText>
+
+          <Input
+            control={control}
+            placeholder={userInfo?.email}
+            name="email"
+            iconLeft="mail"
+            autoCapitalize="none"
+            onChangeText={text => setEmail(text)}
+          />
+        </UserInputContainer>
       </UserContainer>
     </ProfileContainer>
   );

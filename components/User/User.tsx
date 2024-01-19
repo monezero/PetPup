@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { Modal } from '@components/Modal/Modal';
+import { useAuth } from 'contexts/AuthContext';
 import { MenuContainer, MenuImage } from './style';
 
 interface MenuProps {
@@ -17,6 +18,7 @@ export const Menu = ({
   closeModal,
 }: MenuProps) => {
   const [openModal, setOpenModal] = useState(false);
+  const { userInfo } = useAuth();
 
   const showModal = () => {
     setOpenModal(true);
@@ -35,7 +37,7 @@ export const Menu = ({
           showModal(); // Abrir o modal
         }}
       >
-        <MenuImage source={require('@assets/bento.png')} />
+        <MenuImage source={{ uri: userInfo?.photoURL }} />
       </TouchableOpacity>
 
       {isOpen && (

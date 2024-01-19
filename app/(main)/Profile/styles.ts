@@ -40,16 +40,22 @@ export const UserImageWrapper = styled.TouchableOpacity`
   width: 100px;
 `;
 
+export const UserInputContainer = styled.View`
+  max-width: 100%;
+  min-width: 90%;
+  top: 100px;
+`;
+
 export const UserText = styled.Text`
   font-family: ${theme.fonts.roboto_700};
-  font-size: 24px;
+  font-size: 18px;
   color: ${theme.colors.text_black};
-  margin-top: 70px;
+  padding: 18px;
 `;
 
 export const LoadingProfile = styled.ActivityIndicator`
-  height: 100px;
-  width: 100px;
+  height: 400px;
+  width: 400px;
   border-radius: 50px;
   overflow: hidden;
   color: black;
