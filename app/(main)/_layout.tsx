@@ -60,7 +60,9 @@ const MainLayout = () => {
         name="Profile/index"
         options={{
           href: null,
+
           tabBarStyle: {
+            display: 'none',
             position: 'absolute',
             backgroundColor: '#fa2',
             borderTopWidth: 0,

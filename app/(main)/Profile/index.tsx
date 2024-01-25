@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useAuth } from 'contexts/AuthContext';
-import { signOut, updateProfile } from 'firebase/auth';
+import { getAuth, signOut, updateEmail, updateProfile } from 'firebase/auth';
 import {
   getDownloadURL,
   getStorage,
@@ -13,6 +13,7 @@ import { Alert, ActivityIndicator } from 'react-native'; // Importando ActivityI
 import Input from '@components/Input/Input';
 import { ProfileSchema } from '@validation/Login.validation';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { Button } from '@components/Button/Button';
 import {
   LoadingProfile,
   ProfileContainer,
@@ -25,11 +26,12 @@ import {
 
 type FormData = {
   name: string;
+  email: string;
 };
 
 const Profile = () => {
   const { userInfo } = useAuth();
-  const { control, handleSubmit } = useForm<ProfileSchema>({
+  const { control, handleSubmit } = useForm<FormData>({
     resolver: yupResolver(ProfileSchema),
   });
   const [name, setName] = useState('');
@@ -61,6 +63,19 @@ const Profile = () => {
 
     fetchUserProfileImage();
   }, [userInfo?.uid, storage]);
+
+  const auth = getAuth();
+
+  const updateName = updateProfile(auth.currentUser, {
+    displayName: name,
+  })
+    .then(() => {
+      // Nome atualizado
+      console.log(setName);
+    })
+    .catch(error => {
+      console.log(error);
+    });
 
   const handleImageUser = () => {
     Alert.alert(
@@ -238,6 +253,7 @@ const Profile = () => {
             onChangeText={text => setEmail(text)}
           />
         </UserInputContainer>
+        <Button style={{ bottom: -420, width: '85%' }}>Enviar</Button>
       </UserContainer>
     </ProfileContainer>
   );

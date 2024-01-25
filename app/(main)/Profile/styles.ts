@@ -9,7 +9,7 @@ export const ProfileContainer = styled.View`
   flex: 1;
   align-items: center;
   padding: 0px 10px;
-  background-color: ${theme.colors.blue_500};
+  background-color: #2980b9;
 `;
 
 export const UserContainer = styled.View`
@@ -20,7 +20,7 @@ export const UserContainer = styled.View`
   max-height: 90%;
   max-width: 90%;
   min-width: 90%;
-  background-color: ${theme.colors.white};
+  background-color: #f2f2f2;
   border-radius: 16px;
 `;
 
@@ -34,7 +34,7 @@ export const UserImageWrapper = styled.TouchableOpacity`
   position: absolute;
   top: -30px;
   border: 4px;
-  border-color: ${theme.colors.white};
+  border-color: #f2f2f2;
   border-radius: 50px;
   height: 100px;
   width: 100px;

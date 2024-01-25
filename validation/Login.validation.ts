@@ -24,6 +24,6 @@ export const ForgotPasswordSchema = Yup.object({
 });
 
 export const ProfileSchema = Yup.object({
-  name: Yup.string().required('Nome obrigatório'),
-  email: Yup.string().email('Email Inválido').required('Email obrigatório'),
+  name: Yup.string(),
+  email: Yup.string().email('Email Inválido'),
 });
